@@ -27,6 +27,9 @@ devDependencies:
   '@types/cookie':
     specifier: ^0.5.1
     version: 0.5.1
+  '@types/node':
+    specifier: ^18.16.3
+    version: 18.16.3
   '@xata.io/netlify':
     specifier: ^0.1.1
     version: 0.1.1(@types/node@18.16.3)(typescript@5.0.4)
