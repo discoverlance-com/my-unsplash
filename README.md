@@ -1,38 +1,109 @@
-# create-svelte
+<!-- Please update value in the {}  -->
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+<h1 align="center">My Unsplash</h1>
 
-## Creating a project
+<div align="center">
+   Solution for a challenge from  <a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>.
+</div>
 
-If you're seeing this, you've probably already done this step. Congrats!
+<div align="center">
+  <h3>
+    <a href="https://my-devchallenge-unsplash.netlify.app/">
+      Demo
+    </a>
+    <span> | </span>
+    <a href="https://my-devchallenge-unsplash.netlify.app/">
+      Solution
+    </a>
+    <span> | </span>
+    <a href="https://devchallenges.io/challenges/rYyhwJAxMfES5jNQ9YsP">
+      Challenge
+    </a>
+  </h3>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Built With](#built-with)
+- [Features](#features)
+- [How to use](#how-to-use)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
+
+<!-- OVERVIEW -->
+
+## Overview
+
+![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+
+Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
+
+- Where can I see your demo?
+- What was your experience?
+- What have you learned/improved?
+- Your wisdom? :)
+
+### Built With
+
+<!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
+
+- [Sveltekit](https://kit.svelte.dev/)
+- [Tailwind](https://tailwindcss.com/)
+- [Xata](https://xata.io/)
+
+## Features
+
+<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
+
+This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](https://devchallenges.io/challenges/rYyhwJAxMfES5jNQ9YsP) was to build an application to complete the given user stories.
+
+## How To Use
+
+### Prerequisite
+
+- Create a database on Xata [Xata](https://xata.io/).
+- Add the schema to the database:
+  - [database schema](./static/schema.png)
+- Update your `.xatarc` database url to your xata database url
+- Follow the following commands to set up your xata database to work with locally
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
+# if you have not installed xata cli, install it
+npm i --location=global @xata.io/cli@latest
 
-# create a new project in my-app
-npm create svelte@latest my-app
+# login if you have not already done so
+xata auth login
+
+# update the .env variables with your xata database credentials
+cp .env.example .env
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) and [pnpm](https://pnpm.io/) installed on your computer. From your command line:
 
 ```bash
-npm run dev
+# Clone this repository
+$ git clone https://github.com/discoverlance-com/my-unsplash
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# Install dependencies
+$ pnpm install
+
+# Run the app
+$ pnpm dev
 ```
 
-## Building
+## Acknowledgements
 
-To create a production version of your app:
+<!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For example: -->
 
-```bash
-npm run build
-```
+- [Steps to replicate a design with only HTML and CSS](https://devchallenges-blogs.web.app/how-to-replicate-design/)
+- [Node.js](https://nodejs.org/)
+- [Marked - a markdown parser](https://github.com/chjj/marked)
 
-You can preview the production build with `npm run preview`.
+## Contact
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- Website [discoverlance](https://discoverlance.com)
+- GitHub [@discoverlance-com](https://github.com/discoverlance-com)
+- Twitter [@Discoverlance](https://twitter.com/Discoverlance)
