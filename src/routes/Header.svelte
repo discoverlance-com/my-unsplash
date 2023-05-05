@@ -1,9 +1,11 @@
 <script lang="ts">
 	import Button from '$components/Button.svelte';
+	import Modal from '$components/Modal.svelte';
 	import logo from '$lib/images/my_unsplash_logo.svg';
+	import { modal } from '$lib/stores/modal';
 </script>
 
-<nav class="mt-10 flex justify-between items-center">
+<nav class="flex justify-between items-center mt-10">
 	<!-- Title/Logo and search -->
 	<div class="flex gap-4 items-center">
 		<h1>
@@ -14,7 +16,7 @@
 		<!-- Search -->
 		<div>
 			<label class="sr-only" for="search">Search</label>
-			<div class="flex items-center relative">
+			<div class="flex relative items-center">
 				<span
 					class="absolute left-[19px] material-symbols-rounded flex items-center text-primary-gray-100 w-4 h-4"
 				>
@@ -33,5 +35,16 @@
 	</div>
 
 	<!-- Add photo button -->
-	<Button>Add a photo</Button>
+	<Button
+		on:click={() => {
+			$modal.id = 'new-photo';
+		}}
+	>
+		Add a photo
+	</Button>
 </nav>
+
+<!-- New Photo Modal -->
+<Modal modalId="new-photo">
+	<h2>New Photo</h2>
+</Modal>
