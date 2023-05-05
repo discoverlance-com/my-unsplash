@@ -41,7 +41,8 @@ export type DatabaseSchema = {
 const DatabaseClient = buildClient();
 
 const defaultOptions = {
-	databaseURL: env.XATA_DATABASE_URL
+	databaseURL: env.XATA_DATABASE_URL,
+	apiKey: env.XATA_API_KEY
 };
 
 export class XataClient extends DatabaseClient<DatabaseSchema> {

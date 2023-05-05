@@ -1,4 +1,5 @@
 <script>
+	import Gallery from './Gallery.svelte';
 	import Header from './Header.svelte';
 </script>
 
@@ -8,3 +9,5 @@
 </svelte:head>
 
 <Header />
+
+<Gallery />
