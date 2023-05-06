@@ -23,6 +23,9 @@ const config = {
 		}),
 		alias: {
 			$components: 'src/components'
+		},
+		csrf: {
+			checkOrigin: process.env.NODE_ENV === 'production'
 		}
 	}
 };

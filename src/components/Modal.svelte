@@ -1,24 +1,20 @@
 <script lang="ts">
 	import { modal } from '$lib/stores/modal';
-	import Button from './Button.svelte';
 
-	import { afterUpdate } from 'svelte';
+	import { onMount } from 'svelte';
 
 	let dialogElement: HTMLDialogElement;
 	export let modalId: string;
-	export let closeModalText = 'Close';
 
 	$: isDialogActive = modalId === $modal.id && !$modal.open;
 
-	afterUpdate(() => {
-		if (isDialogActive) {
-			openDialog();
-		}
+	onMount(() => {
+		document.body.addEventListener('keydown', function (event) {
+			if (event.key == 'Escape' && isDialogActive) {
+				closeDialog();
+			}
+		});
 	});
-
-	function openDialog() {
-		dialogElement.show();
-	}
 
 	function closeDialog() {
 		dialogElement.close();
@@ -36,19 +32,12 @@
 		bind:this={dialogElement}
 		on:close={() => {
 			$modal.id = '';
+			$modal.open = false;
 		}}
-		on:keydown={(event) => {
-			if (event.key == 'Escape') {
-				closeDialog();
-			}
-		}}
+		open={isDialogActive}
 	>
 		<div>
-			<slot />
-		</div>
-
-		<div class="mt-[20px] flex gap-4 justify-end">
-			<Button variant="outline" color="danger" on:click={closeDialog}>{closeModalText}</Button>
+			<slot close={closeDialog} />
 		</div>
 	</dialog>
 </div>
