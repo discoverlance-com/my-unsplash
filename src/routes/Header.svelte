@@ -26,7 +26,7 @@
 					id="search"
 					name="search"
 					type="text"
-					class="border-primary-gray-100 text-sm text-primary-gray-200 rounded-xl focus:ring-primary-gray-100/50 focus:ring-1 focus:ring-offset-2 placeholder:text-primary-gray-100 pl-[56px] leading-5 py-[18px] h-[55px] w-[300px] border"
+					class="border-primary-gray-100 text-sm text-primary-gray-300 rounded-xl focus:ring-primary-gray-100/50 focus:ring-1 focus:ring-offset-2 placeholder:text-primary-gray-100 pl-[56px] leading-5 py-[18px] h-[55px] w-[300px] border"
 					placeholder="Search by name"
 					required
 				/>
@@ -45,6 +45,30 @@
 </nav>
 
 <!-- New Photo Modal -->
-<Modal modalId="new-photo">
-	<h2>New Photo</h2>
+<Modal modalId="new-photo" closeModalText="Cancel">
+	<div class="space-y-[20px]">
+		<h2 class="text-2xl font-medium text-primary-gray-300">Add a new photo</h2>
+
+		<div>
+			<label for="label" class="block mb-2 text-primary-gray-200">Label</label>
+			<input
+				id="label"
+				name="label"
+				type="text"
+				class="border-primary-gray-100 text-sm text-primary-gray-300 rounded-xl focus:ring-primary-gray-100/50 focus:ring-1 focus:ring-offset-2 placeholder:text-primary-gray-100 leading-5 p-[18px] h-[55px] w-full border"
+				required
+			/>
+		</div>
+
+		<div>
+			<label for="url" class="block mb-2 text-primary-gray-200">Photo URL</label>
+			<input
+				id="url"
+				name="url"
+				type="url"
+				class="border-primary-gray-100 text-sm text-primary-gray-300 rounded-xl focus:ring-primary-gray-100/50 focus:ring-1 focus:ring-offset-2 placeholder:text-primary-gray-100 leading-5 p-[18px] h-[55px] w-full border"
+				required
+			/>
+		</div>
+	</div>
 </Modal>

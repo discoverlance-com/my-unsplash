@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 
 export const load = (async () => {
 	const client = getXataClient();
-	const photos = client.db.photos.getMany({ sort: 'label', pagination: { size: 100 } });
+	const photos = await client.db.photos.getMany({ sort: 'label', pagination: { size: 100 } });
 
 	return {
 		photos

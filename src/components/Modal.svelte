@@ -6,9 +6,12 @@
 
 	let dialogElement: HTMLDialogElement;
 	export let modalId: string;
+	export let closeModalText = 'Close';
+
+	$: isDialogActive = modalId === $modal.id && !$modal.open;
 
 	afterUpdate(() => {
-		if (modalId == $modal.id) {
+		if (isDialogActive) {
 			openDialog();
 		}
 	});
@@ -22,26 +25,33 @@
 	}
 </script>
 
-<dialog
-	class="rounded-xl w-[620px] h-[368px] bg-white transition-all duration-300 backdrop:bg-black backdrop:bg-opacity-50 open:backdrop:animate-[fade-in] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 backdrop-blur-sm"
-	bind:this={dialogElement}
-	on:close={() => {
-		$modal.id = '';
-	}}
-	on:keydown|preventDefault={(event) => {
-		if (event.key == 'Escape') {
-			closeDialog();
-		}
-	}}
+<div
+	data-dialog-backdrop="dialog"
+	data-dialog-backdrop-close="true"
+	class="grid fixed inset-0 place-items-center z-[999] bg-black bg-opacity-25 transition-all duration-300 pointer-events-none"
+	class:hidden={!isDialogActive}
 >
-	<div>
-		<slot />
-	</div>
+	<dialog
+		class="rounded-xl w-[620px] px-6 py-8 relative bg-white pointer-events-auto"
+		bind:this={dialogElement}
+		on:close={() => {
+			$modal.id = '';
+		}}
+		on:keydown={(event) => {
+			if (event.key == 'Escape') {
+				closeDialog();
+			}
+		}}
+	>
+		<div>
+			<slot />
+		</div>
 
-	<div>
-		<Button color="danger" on:click={closeDialog}>Close</Button>
-	</div>
-</dialog>
+		<div class="mt-[20px] flex gap-4 justify-end">
+			<Button variant="outline" color="danger" on:click={closeDialog}>{closeModalText}</Button>
+		</div>
+	</dialog>
+</div>
 
 <style>
 	@keyframes fade-in {

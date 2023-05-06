@@ -6,6 +6,7 @@ export default {
 			colors: {
 				'primary-gray': {
 					100: '#BDBDBD',
+					200: '#4F4F4F',
 					200: '#333333'
 				},
 				'primary-green': {
