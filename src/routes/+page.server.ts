@@ -4,9 +4,16 @@ import { isValidUrl } from '$lib/utils';
 import type { PageServerLoad, Actions } from './$types';
 import { getUser } from '$lib/server/users';
 
-export const load = (async () => {
+export const load = (async ({ url }) => {
+	const name = url.searchParams.get('name') || '';
+
+	console.log({ name });
+
 	const client = getXataClient();
-	const photos = await client.db.photos.getMany({ sort: 'label', pagination: { size: 100 } });
+	const photos = await client.db.photos.sort('label', 'asc').getMany({
+		pagination: { size: 100 },
+		filter: { label: { $contains: name } }
+	});
 
 	return {
 		photos

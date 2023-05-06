@@ -2,12 +2,17 @@
 	import './styles.css';
 </script>
 
-<div class="relative bg-white px-24 max-w-7xl mx-auto">
+<div class="relative px-24 mx-auto max-w-7xl bg-white">
 	<main class="pb-32">
 		<slot />
 	</main>
 
 	<footer class="absolute bottom-4 left-24">
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p class="text-primary-gray-200">
+			created by <strong>Lance</strong> -
+			<a href="https://devchallenges.io" target="_blank" rel="noopener noreferrer"
+				>devChallenges.io</a
+			>
+		</p>
 	</footer>
 </div>

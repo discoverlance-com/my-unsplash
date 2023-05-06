@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Button from '$components/Button.svelte';
-	import Modal from '$components/Modal.svelte';
 	import logo from '$lib/images/my_unsplash_logo.svg';
 	import { modal } from '$lib/stores/modal';
+
+	import { page } from '$app/stores';
 </script>
 
 <nav class="flex justify-between items-center mt-10">
@@ -14,7 +15,7 @@
 		</h1>
 
 		<!-- Search -->
-		<div>
+		<form action="/">
 			<label class="sr-only" for="search">Search</label>
 			<div class="flex relative items-center">
 				<span
@@ -24,14 +25,14 @@
 				</span>
 				<input
 					id="search"
-					name="search"
+					name="name"
 					type="text"
+					value={$page.url.searchParams.get('name') || ''}
 					class="border-primary-gray-100 text-sm text-primary-gray-300 rounded-xl focus:ring-primary-gray-100/50 focus:ring-1 focus:ring-offset-2 placeholder:text-primary-gray-100 pl-[56px] leading-5 py-[18px] h-[55px] w-[300px] border"
 					placeholder="Search by name"
-					required
 				/>
 			</div>
-		</div>
+		</form>
 	</div>
 
 	<!-- Add photo button -->

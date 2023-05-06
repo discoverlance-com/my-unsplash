@@ -6,10 +6,9 @@
 	import { enhance } from '$app/forms';
 	import Modal from '$components/Modal.svelte';
 	import Button from '$components/Button.svelte';
-	import { fade } from 'svelte/transition';
 
 	export let data: PageServerData;
-	let photos = data.photos;
+	$: photos = data.photos;
 	export let form: ActionData;
 	let creating = false;
 </script>
@@ -35,8 +34,8 @@
 				creating = false;
 				if (result.type == 'success') {
 					closeDialog();
+					photos = [result.data?.photo, ...photos];
 				}
-				photos = [result.data.photo, ...photos];
 				update();
 			};
 		}}

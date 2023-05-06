@@ -7,7 +7,7 @@ export default {
 				'primary-gray': {
 					100: '#BDBDBD',
 					200: '#4F4F4F',
-					200: '#333333'
+					300: '#333333'
 				},
 				'primary-green': {
 					100: '#3DB46D'

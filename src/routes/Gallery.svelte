@@ -1,52 +1,73 @@
 <script lang="ts">
-	import { quintOut } from 'svelte/easing';
-	import { crossfade } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 	import type { RecordArray, SelectedPick } from '@xata.io/client';
 	import type { PhotosRecord } from '$lib/server/xata';
+	import PhotoItem from './PhotoItem.svelte';
+	import Modal from '$components/Modal.svelte';
 
-	const [send, receive] = crossfade({
-		duration: (d) => Math.sqrt(d * 200),
+	import { enhance } from '$app/forms';
+	import Button from '$components/Button.svelte';
+	import { modal } from '$lib/stores/modal';
 
-		fallback(node) {
-			const style = getComputedStyle(node);
-			const transform = style.transform === 'none' ? '' : style.transform;
-
-			return {
-				duration: 600,
-				easing: quintOut,
-				css: (t) => `
-					transform: ${transform} scale(${t});
-					opacity: ${t}
-				`
-			};
-		}
-	});
-
+	let deleting = false;
+	let itemTobeDeleted: string | null = null;
 	export let photos: RecordArray<Readonly<SelectedPick<PhotosRecord, ['*']>>>;
-	$: totalItems = Math.ceil(photos.length / 3);
 </script>
 
-<div class="grid grid-cols-2 gap-11 md:grid-cols-3 mt-[75px]">
-	<div class="grid gap-11">
-		{#each photos.slice(0, totalItems) as item (item.id)}
-			<div in:receive={{ key: item.id }} out:send={{ key: item.id }} animate:flip>
-				<img class="max-w-full h-auto rounded-2xl" src={item.url} alt="" />
-			</div>
-		{/each}
+{#if photos.length == 0}
+	<div class="col-span-full">
+		<p class="text-lg text-primary-gray-200">No gallery item maches the current filter</p>
 	</div>
-	<div class="grid gap-11">
-		{#each photos.slice(totalItems, totalItems * 2) as item (item.id)}
-			<div in:receive={{ key: 'todo.id' }} out:send={{ key: 'todo.id' }} animate:flip>
-				<img class="max-w-full h-auto rounded-2xl" src={item.url} alt="" />
-			</div>
-		{/each}
-	</div>
-	<div class="grid gap-11">
-		{#each photos.slice(totalItems * 2) as item (item.id)}
-			<div in:receive={{ key: 'todo.id' }} out:send={{ key: 'todo.id' }} animate:flip>
-				<img class="max-w-full h-auto rounded-2xl" src={item.url} alt="" />
-			</div>
-		{/each}
-	</div>
+{/if}
+
+<div class="columns-3 gap-11 space-y-11 mt-[75px]">
+	{#each photos as item (item.id)}
+		<div animate:flip>
+			<PhotoItem
+				url={item.url}
+				label={item.label}
+				id={item.id}
+				on:delete={(event) => {
+					itemTobeDeleted = event.detail.id;
+					$modal.id = 'delete-photo';
+				}}
+			/>
+		</div>
+	{/each}
 </div>
+
+<!-- Delete Photo Modal -->
+<Modal modalId="delete-photo" let:close={closeDialog}>
+	<form
+		class="space-y-[20px]"
+		method="post"
+		action="?/delete"
+		use:enhance={async () => {
+			deleting = true;
+			return async ({ update, result }) => {
+				deleting = false;
+				if (result.type == 'success') {
+					closeDialog();
+					photos = photos.filter((photo) => photo.id !== itemTobeDeleted);
+					itemTobeDeleted = null;
+				}
+				update();
+			};
+		}}
+	>
+		<h2 class="text-2xl font-medium text-primary-gray-300">Add you sure?</h2>
+
+		<input type="hidden" name="id" value={itemTobeDeleted} />
+
+		<div class="flex gap-4 justify-end">
+			<Button type="button" variant="outline" color="danger" on:click={closeDialog}>Cancel</Button>
+			<Button type="submit">
+				{#if deleting}
+					Deleting...
+				{:else}
+					Delete
+				{/if}
+			</Button>
+		</div>
+	</form>
+</Modal>
