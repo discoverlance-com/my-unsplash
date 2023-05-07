@@ -37,14 +37,17 @@
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot](./static/example.png)
 
-Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
+My Unsplash is a project that allows users to store links to their photos for _6 months_. It supports searching for photo links you have added by the names you give to them.
 
-- Where can I see your demo?
-- What was your experience?
-- What have you learned/improved?
-- Your wisdom? :)
+I as usual used [Sveltekit](https://kit.svelte.dev/) to build the project. For the database, I decided to go with [Xata](https://xata.io) partly because they have a generous free tier and they have a very good database client for querying data and working with it.
+
+One of the things I learned was using `columns` in tailwindcss to create the masonry layout. I initially tried with css grid but I just couldn't get it to work properly as sometimes some of the images were not occupying the full height of their parent element and if I choose to strictly give them a fixed height then some of them will also look weird. So as usual, I did some searching on google and found an article on [masonry layout](https://prototypr.io/post/masonry-layout-css-tailwind) using tailwindcss `colomns` and that did the trick.
+
+Also, I did opt for **svelte stores** in building the modal which I have not really done before. What I still find challenging and is not really the best is that when I load the page, it takes a few miliseconds before the modal starts to work. Thus, the page loads but when you click the button immediately, it does not work, it works perhaps in the second try and I realized there was a slight delay before it worked. I am not exactly sure why, I am assuming the it's because the javascript is being initialized or hydrated in the dom but I am not 100% sure. I will leave it for now and if I were to find the solution later, I will update it and also add what I found here.
+
+Feel free to suggest or provide feedback on how I could fix the modal taking a bit of time to initialize issue if you know how. I will really appreciate your feedback.
 
 ### Built With
 
@@ -56,9 +59,9 @@ Introduce your projects by taking a screenshot or a gif. Try to tell visitors a 
 
 ## Features
 
-<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
-
-This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](https://devchallenges.io/challenges/rYyhwJAxMfES5jNQ9YsP) was to build an application to complete the given user stories.
+- Add links and labels to your photos
+- Search your added links and photos by the label or name
+- View the added photos for 6 months.
 
 ## How To Use
 
@@ -68,7 +71,8 @@ This application/site was created as a submission to a [DevChallenges](https://d
 - Add the schema to the database:
   - [database schema](./static/schema.png)
 - Update your `.xatarc` database url to your xata database url
-- Follow the following commands to set up your xata database to work with locally
+- Login to xata if you have not already in your command prompt using the xata cli
+- Add your environment variables
 
 ```bash
 # if you have not installed xata cli, install it
@@ -96,11 +100,10 @@ $ pnpm dev
 
 ## Acknowledgements
 
-<!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For example: -->
-
 - [Steps to replicate a design with only HTML and CSS](https://devchallenges-blogs.web.app/how-to-replicate-design/)
 - [Node.js](https://nodejs.org/)
 - [Marked - a markdown parser](https://github.com/chjj/marked)
+- [Masonry layout using tailwindcss](https://prototypr.io/post/masonry-layout-css-tailwind)
 
 ## Contact
 

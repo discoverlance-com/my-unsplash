@@ -15,7 +15,7 @@
 </script>
 
 {#if photos.length == 0}
-	<div class="col-span-full">
+	<div class="col-span-full mt-[75px]">
 		<p class="text-lg text-primary-gray-200">No gallery item maches the current filter</p>
 	</div>
 {/if}
