@@ -70,16 +70,22 @@ Feel free to suggest or provide feedback on how I could fix the modal taking a b
 - Create a database on Xata [Xata](https://xata.io/).
 - Add the schema to the database:
   - [database schema](./static/schema.png)
-- Update your `.xatarc` database url to your xata database url
 - Login to xata if you have not already in your command prompt using the xata cli
+- Link your project to xata workspace
 - Add your environment variables
 
 ```bash
 # if you have not installed xata cli, install it
 npm i --location=global @xata.io/cli@latest
 
+# link project to xata workspace
+xata init
+
 # login if you have not already done so
 xata auth login
+
+# generate your schema types
+xata codegen
 
 # update the .env variables with your xata database credentials
 cp .env.example .env
