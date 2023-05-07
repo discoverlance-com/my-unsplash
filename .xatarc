@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Lance-Armah-Abraham-s-workspace-2k7a5u.us-east-1.xata.sh/db/my-unsplash-challenge",
+  "codegen": {
+    "output": "src/lib/server/xata.ts"
+  }
+}
