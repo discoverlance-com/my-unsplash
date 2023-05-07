@@ -4,16 +4,22 @@ import { isValidUrl } from '$lib/utils';
 import type { PageServerLoad, Actions } from './$types';
 import { getUser } from '$lib/server/users';
 
-export const load = (async ({ url }) => {
+export const load = (async ({ url, locals }) => {
 	const name = url.searchParams.get('name') || '';
 
-	console.log({ name });
+	const userId = locals.user.userId;
 
 	const client = getXataClient();
-	const photos = await client.db.photos.sort('label', 'asc').getMany({
-		pagination: { size: 100 },
-		filter: { label: { $contains: name } }
-	});
+	const photos = await client.db.photos
+		.filter({
+			'user.identifier': { $is: userId }
+		})
+		.sort('label', 'asc')
+
+		.getMany({
+			pagination: { size: 100 },
+			filter: { label: { $contains: name } }
+		});
 
 	return {
 		photos
