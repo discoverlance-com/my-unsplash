@@ -14,7 +14,7 @@ export const load = (async ({ url, locals }) => {
 		.filter({
 			'user.identifier': { $is: userId }
 		})
-		.sort('created_at', 'asc')
+		.sort('created_at', 'desc')
 		.getMany({
 			pagination: { size: 100 },
 			filter: { label: { $contains: name } }
