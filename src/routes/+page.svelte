@@ -28,14 +28,15 @@
 		class="space-y-[20px]"
 		method="post"
 		action="?/create"
-		use:enhance={async () => {
+		use:enhance={async ({ form }) => {
 			creating = true;
 			return async ({ update, result }) => {
 				creating = false;
 				if (result.type == 'success') {
 					closeDialog();
 					photos = [result.data?.photo, ...photos];
-				}
+					form.reset()
+				}    
 			};
 		}}
 	>
