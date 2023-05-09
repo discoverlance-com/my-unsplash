@@ -36,7 +36,6 @@
 					closeDialog();
 					photos = [result.data?.photo, ...photos];
 				}
-				update();
 			};
 		}}
 	>
