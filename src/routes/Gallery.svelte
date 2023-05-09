@@ -51,7 +51,6 @@
 					photos = photos.filter((photo) => photo.id !== itemTobeDeleted);
 					itemTobeDeleted = null;
 				}
-				update();
 			};
 		}}
 	>
